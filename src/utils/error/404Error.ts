@@ -5,7 +5,7 @@ class Error404 extends BaseError {
 
   errorType = 'NOT_FOUND';
 
-  constructor(message:string, private property?:string) {
+  constructor(message: string, private property?: string) {
     super(message);
 
     Object.setPrototypeOf(this, Error404.prototype);

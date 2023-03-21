@@ -26,21 +26,15 @@ const profile = db.sequelize.define('Profiles', {
     type: DataTypes.BLOB('medium'),
     allowNull: false
   },
-  created_at: {
-    allowNull: false,
-    type: DataTypes.DATE
-  },
-  updated_at: {
-    allowNull: false,
-    type: DataTypes.DATE
-  }
+
 }, {
   // Other model options go here
+  timestamps: true
 });
 
 user.hasOne(profile, { foreignKey: 'user_id' });
 company.hasOne(profile, { foreignKey: 'company_id' })
 
-profile.sync({ alter: true })
+profile.sync({ alter: false })
 
 export default profile

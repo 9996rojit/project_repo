@@ -1,14 +1,15 @@
 import { Sequelize, DataTypes } from 'sequelize'
-import bcrypt from 'bcrypt'
 import type from './type';
 
+const bcrypt = require('bcryptjs')
 const db = require('@/helper/databaseConnector');
 
 const User = db.sequelize.define('Users', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
-    primaryKey: true
+    primaryKey: true,
+    allowNull: false
 
   },
   // Model attributes are defined here
@@ -69,23 +70,16 @@ const User = db.sequelize.define('Users', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  created_at: {
-    allowNull: false,
-    type: DataTypes.DATE
-  },
-  updated_at: {
-    allowNull: false,
-    type: DataTypes.DATE
-  }
+
 }, {
+  timestamps: true
   // Other model options go here
 });
 
 
-User.addHook('beforeCreate', async (userData: any, options: any) => {
+User.addHook('beforeCreate', async (user: any, options: any) => {
   const salt = await bcrypt.genSaltSync(12)
-  // eslint-disable-next-line no-param-reassign
-  userData.password = bcrypt.hashSync(userData.password, salt)
+  user.password = bcrypt.hashSync(user.password, salt)
 })
 
 

@@ -1,5 +1,6 @@
 import AdminController from '@/controller/Admin';
-
+import PermissionController from '@/controller/Admin/permission';
+import TypeController from '@/controller/Admin/type';
 import use from '@/utils/tryCatch'
 
 function AdminHandler(router: any) {
@@ -19,6 +20,12 @@ function AdminHandler(router: any) {
   router.post('/user', AdminController.createUser);
 
   router.post('/change-password/:id', AdminController.changeUserPassword);
+
+  router.post('/permission', use(PermissionController.AddPermission))
+
+  router.get('/permission', use(PermissionController.getAllPermissions))
+
+  router.post('/type', use(TypeController.AddType))
 
   return router
 }

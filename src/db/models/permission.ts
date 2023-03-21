@@ -23,15 +23,9 @@ const permission = db.sequelize.define('Permissions', {
     type: DataTypes.JSONB,
     allowNull: false
   },
-  created_at: {
-    allowNull: false,
-    type: DataTypes.DATE
-  },
-  updated_at: {
-    allowNull: false,
-    type: DataTypes.DATE
-  }
+
 }, {
+  timestamps: true
   // Other model options go here
 });
 permission.sync({ alter: false })

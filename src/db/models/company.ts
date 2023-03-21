@@ -32,19 +32,13 @@ const company = db.sequelize.define('companies', {
     type: DataTypes.INTEGER,
     defaultValue: 0
   },
-  created_at: {
-    allowNull: false,
-    type: DataTypes.DATE
-  },
-  updated_at: {
-    allowNull: false,
-    type: DataTypes.DATE
-  }
+
 }, {
+  timestamps: true
   // Other model options go here
 });
 
 company.belongsTo(user, { foreignKey: 'user_id' })
-company.sync({ alter: true })
+company.sync({ alter: false })
 
 export default company

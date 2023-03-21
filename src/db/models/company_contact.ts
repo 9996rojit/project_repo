@@ -13,20 +13,14 @@ const companyContact = db.sequelize.define('Company_contacts', {
     primaryKey: true
 
   },
-  createdAt: {
-    allowNull: false,
-    type: DataTypes.DATE
-  },
-  updatedAt: {
-    allowNull: false,
-    type: DataTypes.DATE
-  }
+
 }, {
+  timestamps: true
   // Other model options go here
 });
 
 user.hasOne(companyContact, { foreignKey: 'user_id' })
 company.hasOne(companyContact, { foreignKey: 'company_id' })
-companyContact.sync({ alter: true })
+companyContact.sync({ alter: false })
 
 export default companyContact

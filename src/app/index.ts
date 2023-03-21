@@ -23,11 +23,11 @@ function App(NODE_ENV: string) {
     app.use('/api', HandelRouter(router, passport));
   }
 
-  app.use((err: Error, req: any, res: any, Next: any) => {
-    console.log("🚀 ~ file: index.ts:27 ~ app.use ~ err:", err);
-    console.log(err)
-  })
-  // app.use(notFound)
+  // app.use((err: Error, req: any, res: any, Next: any) => {
+  //   console.log("🚀 ~ file: index.ts:27 ~ app.use ~ err:", err);
+  //   console.log(err)
+  // })
+  app.use(errorHandler)
 
   return app;
 }

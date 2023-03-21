@@ -18,16 +18,10 @@ const Type = db.sequelize.define('Types', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  created_at: {
-    allowNull: false,
-    type: DataTypes.DATE
-  },
-  updated_at: {
-    allowNull: false,
-    type: DataTypes.DATE
-  }
+
 }, {
   // Other model options go here
+  timestamps: true
 });
 
 

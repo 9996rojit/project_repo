@@ -2,15 +2,18 @@ import { NextFunction, Request, Response } from 'express';
 import User from '@/db/models/user'
 
 import validator from '@/helper/validator/user.validation'
-import { loginLogic } from '@/service/admin/authService'
+import { loginLogic, registerLogic } from '@/service/admin/authService'
 
 const Login = async (req: Request, res: Response) => {
-  const { email, password } = req.body
-  const data = await loginLogic(User, { email, password })
-  console.log("🚀 ~ file: index.ts:10 ~ Login ~ data:", data);
+  const { contactNumber, password } = req.body
+  const data = await loginLogic(User, { contactNumber, password })
+
 };
 
 const AddUser = async (req: Request, res: Response, next: NextFunction) => {
+  const body = req.body;
+
+  const data = await registerLogic(User, body)
 
 };
 

@@ -1,15 +1,25 @@
 import { Op } from 'sequelize'
-import bcrypt from 'bcrypt'
 import Error404 from '@/utils/error/404Error'
 import errors from '@/Error'
-import BaseError from '@/utils/error/BaseError'
 import UserError from '@/utils/error/UserError'
 
+const bcrypt = require('bcryptjs')
 
 interface IUSER {
-    email: string | undefined
+    email?: string | undefined
     password: string | undefined
     contactNumber?: string | undefined
+}
+
+interface IUSERREGISTER extends IUSER {
+    firstname: string | undefined
+    middlename?: string | undefined
+    lastname: string | undefined
+    gender: string | undefined
+    is_active?: boolean | undefined
+    country_code?: string | undefined
+    is_premium?: Boolean | undefined
+    plan_type?: string | undefined
 }
 
 function parsePassword(password: string | undefined, hash: string): Promise<boolean> {
@@ -19,14 +29,11 @@ function parsePassword(password: string | undefined, hash: string): Promise<bool
 
 
 export const loginLogic = async (user: any, info: IUSER) => {
+
     const requestUser = await user.findOne({
         where: {
-            [Op.or]: [
-                { email: info.email },
-                // { contact_number: info.contactNumber }
-            ]
+            contact_number: info.contactNumber
         }
-
     })
     if (requestUser) {
         const isValidaPassword = await parsePassword(info.password, requestUser.password)
@@ -34,22 +41,26 @@ export const loginLogic = async (user: any, info: IUSER) => {
             throw new UserError(errors.PasswordDidNotMatched, "password")
         } else {
             return "User created successFully"
-
-
         }
 
 
 
 
     } else {
-        throw new Error404(errors.UserNotFound, (!info.email) ? 'email' : 'contactNumber')
+        throw new Error404(errors.UserNotFound, 'contactNumber')
     }
 
 
 }
 
 
-export const registerLogic = async (user: any) => {
+export const registerLogic = async (user: any, info: IUSERREGISTER) => {
+    const registerUser = await user.create(info)
+    if (registerUser) {
+        return "User created successfully"
+    }
+    else {
+        throw new UserError('Failed to create user', "email")
 
-
+    }
 }
