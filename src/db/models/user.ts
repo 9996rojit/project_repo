@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { Sequelize, DataTypes } from 'sequelize'
 import type from './type';
 
@@ -80,8 +81,8 @@ User.addHook('beforeCreate', async (user: any, options: any) => {
 })
 
 
-User.belongsTo(type, { foreignKey: 'type_id' })
+User.belongsTo(type, { foreignKey: 'type_id', allowNull: false })
 
-User.sync({ alter: true })
+User.sync({ alter: false })
 
 export default User

@@ -13,7 +13,7 @@ const registerData = {
     lastName: Joi.string().required(),
     middleName: Joi.string(),
     gender: Joi.string().required(),
-    role: Joi.string().required(),
+    role: Joi.string(),
     country_code: Joi.string().required(),
     is_active: Joi.boolean(),
     is_premium: Joi.boolean(),

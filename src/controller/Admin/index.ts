@@ -18,10 +18,10 @@ const Login = async (req: Request, res: Response) => {
 };
 
 const AddUser = async (req: Request, res: Response, next: NextFunction) => {
-  const body = req.body;
-  const validateData = await validator.userSchema.validate(body)
+  const userData = req.body;
+  const validateData = await validator.userSchema.validate(userData)
   console.log("🤫🤫🤫 ~ file: index.ts:23 ~ AddUser ~ validateData:", validateData)
-  const data = await registerLogic(User, body)
+  const data = await registerLogic(User, userData)
   res.send(data)
 
 };

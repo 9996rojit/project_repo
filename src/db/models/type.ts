@@ -25,7 +25,7 @@ const Type = db.sequelize.define('Types', {
 });
 
 
-Type.belongsTo(permission, { foreignKey: 'permission_id' })
+Type.belongsTo(permission, { foreignKey: 'permission_id', allowNull: false })
 
 Type.sync({ alter: false })
 
