@@ -10,7 +10,6 @@ const User = db.sequelize.define('Users', {
     autoIncrement: true,
     primaryKey: true,
     allowNull: false
-
   },
   // Model attributes are defined here
   userId: {
@@ -30,13 +29,13 @@ const User = db.sequelize.define('Users', {
     allowNull: false
   },
   role: {
-    type: DataTypes.ENUM,
-    values: ['CEO', 'USER'],
+    type: DataTypes.ENUM('CEO', 'USER'),
     defaultValue: 'USER',
   },
   email: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true,
   },
   country_code: {
     type: DataTypes.STRING,
@@ -45,13 +44,12 @@ const User = db.sequelize.define('Users', {
   },
   contact_number: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true,
   },
   gender: {
-    type: DataTypes.ENUM,
-    values: ['Male', "Female", "Other"],
+    type: DataTypes.ENUM('Male', 'Female', 'Other'),
     defaultValue: 'Male',
-
   },
   is_active: {
     type: DataTypes.BOOLEAN,
@@ -62,8 +60,7 @@ const User = db.sequelize.define('Users', {
     defaultValue: false
   },
   plan_type: {
-    type: DataTypes.ENUM,
-    values: ["Free", "Gold", "Platinume", "Diamond"],
+    type: DataTypes.ENUM('Free', 'Gold', 'Platinume', 'Diamond'),
     defaultValue: 'Free'
   },
   password: {
@@ -85,6 +82,6 @@ User.addHook('beforeCreate', async (user: any, options: any) => {
 
 User.belongsTo(type, { foreignKey: 'type_id' })
 
-User.sync({ alter: false })
+User.sync({ alter: true })
 
 export default User

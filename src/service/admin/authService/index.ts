@@ -23,7 +23,7 @@ interface IUSERREGISTER extends IUSER {
 }
 
 function parsePassword(password: string | undefined, hash: string): Promise<boolean> {
-    return bcrypt.compare(hash, password as string)
+    return bcrypt.compareSync(hash, password as string)
 }
 
 
@@ -35,6 +35,8 @@ export const loginLogic = async (user: any, info: IUSER) => {
             contact_number: info.contactNumber
         }
     })
+    console.log("🤫🤫🤫 ~ file: index.ts:38 ~ loginLogic ~ requestUser:", requestUser)
+
     if (requestUser) {
         const isValidaPassword = await parsePassword(info.password, requestUser.password)
         if (!isValidaPassword) {
@@ -63,4 +65,26 @@ export const registerLogic = async (user: any, info: IUSERREGISTER) => {
         throw new UserError('Failed to create user', "email")
 
     }
+}
+
+
+export const getAllUser = async (user: any) => {
+    const data = await user.find();
+    if (data) {
+        return data
+    }
+    else {
+        throw new Error404("Failed to get User", "User")
+    }
+}
+export const getSingleUserById = async (user: any, type: any, id: string) => {
+
+    const userData = await user.findOne({ where: { user_id: id }, include: [{ model: type, attribute: ['name'] }] })
+    if (userData) {
+        return userData
+    }
+    else {
+        throw new Error404("Failed to get User", "singleUser")
+    }
+
 }

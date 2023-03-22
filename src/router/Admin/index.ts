@@ -27,6 +27,8 @@ function AdminHandler(router: any) {
 
   router.post('/type', use(TypeController.AddType))
 
+  router.get('/types', use(TypeController.GetTypes))
+
   return router
 }
 
