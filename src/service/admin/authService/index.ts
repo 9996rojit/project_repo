@@ -24,7 +24,7 @@ interface IUSERREGISTER extends IUSER {
 }
 
 async function parsePassword(password: string, hash: string): Promise<boolean> {
-    const isValid = await bcrypt.compare(hash, password)
+    const isValid = await bcrypt.compare(password, hash)
     return isValid
 }
 
@@ -64,7 +64,7 @@ export const registerLogic = async (user: any, info: IUSERREGISTER) => {
 
 
 export const getAllUser = async (user: any) => {
-    const data = await user.findAll();
+    const data = await user.findAll({ attributes: ['id', 'contact_number', 'firstName', 'lastName', 'email', 'middleName', 'gender'] });
     if (data) return data
     throw new Error404("Failed to get User", "User")
 

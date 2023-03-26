@@ -4,7 +4,7 @@ import user from './user';
 
 const db = require('@/helper/databaseConnector');
 
-console.log("🚀 ~ file: company_contact.ts:6 ~ db:", db);
+
 
 const companyContact = db.sequelize.define('Company_contacts', {
   id: {

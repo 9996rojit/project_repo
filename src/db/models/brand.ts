@@ -2,36 +2,29 @@ import { Sequelize, DataTypes } from 'sequelize'
 
 const db = require('@/helper/databaseConnector');
 
-const category = db.sequelize.define('categories', {
+const brand = db.sequelize.define('brands', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
 
     },
-    category_id: {
+    brand_id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false
     },
-    category_name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-    },
-    category_image: {
-        type: DataTypes.STRING,
-        DafaultValue: 'https://cdn-icons-png.flaticon.com/512/2088/2088090.png',
-        allowNull: false
-    },
-    category_slug: {
+    brand_name: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    subCategory_id: {
-        type: DataTypes.INTEGER,
-        allowNull: true
+    brand_description: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
+
+
+
 
 }, {
     timestamps: true
@@ -39,6 +32,6 @@ const category = db.sequelize.define('categories', {
 });
 
 
-category.sync({ alter: false })
+brand.sync({ alter: false })
 
-export default category
+export default brand

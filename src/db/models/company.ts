@@ -38,7 +38,7 @@ const company = db.sequelize.define('companies', {
   // Other model options go here
 });
 
-company.belongsTo(user, { foreignKey: 'user_id' })
-company.sync({ alter: false })
+company.belongsTo(user, { foreignKey: { field: 'user_id', allowNull: false } })
+company.sync({ alter: true })
 
 export default company

@@ -7,7 +7,7 @@ const AddPermission = async (req: Request, res: Response, next: NextFunction) =>
   const permissionData = req.body;
 
   const permissionRequest = await createPermission(permission, permissionData)
-
+  res.send(permissionRequest)
 }
 
 const getAllPermissions = async (req: Request, res: Response, next: NextFunction) => {

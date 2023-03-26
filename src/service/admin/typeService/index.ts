@@ -7,6 +7,7 @@ interface ITYPE {
 }
 
 export const createType = async (type: any, info: ITYPE) => {
+  console.log(info)
   const dbData = await type.create(info)
 
   if (dbData) return "Type Created Successfully"

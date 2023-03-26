@@ -1,4 +1,5 @@
 import { Sequelize, DataTypes } from 'sequelize'
+import brand from './brand';
 import company from './company';
 import user from './user';
 
@@ -23,8 +24,9 @@ const profile = db.sequelize.define('Profiles', {
     DefaultValue: 'https://cdn-icons-png.flaticon.com/512/2088/2088090.png'
   },
   profile_image: {
-    type: DataTypes.BLOB('medium'),
-    allowNull: false
+    type: DataTypes.STRING,
+    allowNull: false,
+    DefaultValue: 'https://cdn-icons-png.flaticon.com/512/2088/2088090.png'
   },
 
 }, {
@@ -32,8 +34,9 @@ const profile = db.sequelize.define('Profiles', {
   timestamps: true
 });
 
-user.hasOne(profile, { foreignKey: 'user_id' });
-company.hasOne(profile, { foreignKey: 'company_id' })
+user.hasOne(profile, { foreignKey: { field: 'user_id' } });
+company.hasOne(profile, { foreignKey: 'company_id' });
+brand.hasOne(profile, { foreignKey: 'brand_id' })
 
 profile.sync({ alter: false })
 

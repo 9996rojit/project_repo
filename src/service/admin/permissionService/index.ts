@@ -8,7 +8,9 @@ interface IPERMISSION {
 }
 
 export const createPermission = async (permission: any, info: IPERMISSION) => {
+  console.log(info)
   const permissionRequest = await permission.create(info)
+  console.log("🚀 ~ file: index.ts:13 ~ createPermission ~ permissionRequest:", permissionRequest);
   if (permissionRequest) return "Permission created successfully"
   throw new UserError("Failed to create permission", "permission")
 }

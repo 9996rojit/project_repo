@@ -20,7 +20,7 @@ const permission = db.sequelize.define('Permissions', {
     allowNull: false
   },
   permission: {
-    type: DataTypes.JSONB,
+    type: DataTypes.ARRAY(DataTypes.STRING),
     allowNull: false
   },
 

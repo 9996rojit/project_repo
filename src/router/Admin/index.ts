@@ -1,7 +1,9 @@
 import AdminController from '@/controller/Admin';
 import PermissionController from '@/controller/Admin/permission';
 import TypeController from '@/controller/Admin/type';
+import CategoryController from '@/controller/Admin/category'
 import use from '@/utils/tryCatch'
+import { fileUploadHandler } from '@/helper/imageUploader';
 
 function AdminHandler(router: any) {
   /**
@@ -28,6 +30,10 @@ function AdminHandler(router: any) {
   router.post('/type', use(TypeController.AddType))
 
   router.get('/types', use(TypeController.GetTypes))
+
+  router.post('/category', fileUploadHandler('category').single('category_image'), use(CategoryController.createCategory))
+
+  router.get('/category', use(CategoryController.getCategory))
 
   return router
 }

@@ -29,6 +29,7 @@ const User = db.sequelize.define('Users', {
     type: DataTypes.STRING,
     allowNull: false
   },
+  // add dob of a user
   role: {
     type: DataTypes.ENUM('CEO', 'USER'),
     defaultValue: 'USER',
@@ -81,8 +82,8 @@ User.addHook('beforeCreate', async (user: any, options: any) => {
 })
 
 
-User.belongsTo(type, { foreignKey: 'type_id', allowNull: false })
+User.belongsTo(type, { foreignKey: { field: 'type_id', allowNull: false } })
 
-User.sync({ alter: false })
+User.sync({ alter: true })
 
 export default User
